@@ -1,0 +1,565 @@
+<!--
+ API Documentation HTML Template  - 1.0.1
+ Copyright © 2016 Florian Nicolas
+ Licensed under the MIT license.
+ https://github.com/ticlekiwi/API-Documentation-HTML-Template
+ !-->
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>DebugYourself</title>
+    <meta name="description" content="">
+    <meta name="author" content="ticlekiwi">
+
+    <meta http-equiv="cleartype" content="on">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/hightlightjs-dark.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/style.css" media="all">
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+</head>
+
+<body class="one-content-column-version">
+<div class="left-menu">
+    <div class="content-logo">
+        <div class="logo">
+            <img alt="platform by Emily van den Heever from the Noun Project" title="platform by Emily van den Heever from the Noun Project" src="images/logo.png" height="32" />
+            <span>DebugYourself</span>
+        </div>
+        <button class="burger-menu-icon" id="button-menu-mobile">
+            <svg width="34" height="34" viewBox="0 0 100 100"><path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"></path><path class="line line2" d="M 20,50 H 80"></path><path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"></path></svg>
+        </button>
+    </div>
+    <div class="mobile-menu-closer"></div>
+    <div class="content-menu">
+        <div class="content-infos">
+            <div class="info"><b>Version:</b> 1.0.5</div>
+            <div class="info"><b>Last Updated:</b> 15th Sep, 2021</div>
+        </div>
+        <ul>
+            <li class="scroll-to-link active" data-target="content-get-registers">
+                <a>Registers</a>
+            </li>
+            <li class="scroll-to-link active indent" data-target="content-get-classfunctionregister">
+                <a>ClassFunctionRegister</a>
+            </li>
+            <li class="scroll-to-link active indent" data-target="content-get-objectvariableregister">
+                <a>ObjectVariableRegister</a>
+            </li>
+            <li class="scroll-to-link active indent" data-target="content-get-globalfunctionregister">
+                <a>GlobalFunctionRegister</a>
+            </li>
+            <li class="scroll-to-link active indent" data-target="content-get-fundamentalvariableregister">
+                <a>FundamentalVariableRegister</a>
+            </li>
+            <li class="scroll-to-link active" data-target="content-get-binders">
+                <a>Binders</a>
+            </li>
+            <li class="scroll-to-link active indent" data-target="content-get-classfunctionregisterbinder">
+                <a>ClassFunctionRegisterBinder</a>
+            </li>
+            <li class="scroll-to-link active indent" data-target="content-get-objectvariableregisterbinder">
+                <a>ObjectVariableRegisterBinder</a>
+            </li>
+            <li class="scroll-to-link active indent" data-target="content-get-globalfunctionregisterbinder">
+                <a>GlobalFunctionRegisterBinder</a>
+            </li>
+            <li class="scroll-to-link active indent" data-target="content-get-fundamentalvariableregisterbinder">
+                <a>FundamentalVariableRegisterBinder</a>
+            </li>
+            <li class="scroll-to-link active" data-target="content-get-messaging">
+                <a>Messaging</a>
+            </li>
+            <li class="scroll-to-link active indent" data-target="content-get-debug">
+                <a>debug</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="content-page">
+    <div class="content">
+        <div class="overflow-hidden content-section" id="content-get-registers">
+            <h1>Registers</h1>
+            <div class="overflow-hidden content-section" id="content-get-classfunctionregister">
+                <h2>ClassFunctionRegister</h2>
+                    <p>Data relation lookup between class type and belonging functions.</p>
+                    <h3>Specification</h3>
+                <pre><code class="cpp">
+template&lt;auto... functionPointers&gt;
+class ClassFunctionRegister{
+    template&lt;class... Parameters&gt;
+    ClassFunctionRegister(Parameters... names);
+    GlobalFunctionRegister(std::tuple&lt;Parameters...&gt; names);
+};
+                </code></pre>
+                <h3>Parameters</h3>
+
+                <p><code class="highlighted break-word">functionPointers...</code><br> 
+                    List of all function addresses to keep track of in one class.</p>
+                <p><code class="highlighted break-word">names...</code> <br> 
+                Name of functionPointers... in same order. These names will be displayed in database entries. If left blank or set to nullptr it will be tagged as #UNNAMED in the entry. For use of tuple as argument see utility function N in DebugYourselfUtility.</p>
+                <h3>Description</h3>
+                    <p>Function pointers are stored compiled time, and names should be initialized once per class.</p>
+                
+                <h3>
+                    Examples
+                </h3>
+                    <pre><code>
+class ExampleClass {
+private:
+    void voidFunction() {}
+public:
+    bool boolFunction() { return true; }
+    char charFunction() { return ' '; }
+
+    inline static auto CLASSREGISTER =
+        DebugYourself::ClassFunctionRegister&lt;
+        &TestClass::voidFunction,
+        &TestClass::boolFunction,
+        &TestClass::charFunction&gt;(
+            "voidFunction",
+            "boolFunction",
+            "charFunction");
+};
+                    </code></pre>
+                <h3>
+                    Errors
+                </h3>
+            </div>
+            <div class="overflow-hidden content-section" id="content-get-objectvariableregister">
+                <h2>ObjectVariableRegister</h2>
+                    <p>Data relation lookup between object and belonging variables.</p>
+                    <h3>Specification</h3>
+                <pre><code class="cpp">
+template&lt;class ObjectType, class... Types&gt;
+class ObjectVariableRegister{
+    ObjectVariableRegister();
+    ObjectVariableRegister(ObjectType* object, std::tuple&lt;Types*...&gt; variables);
+    ObjectVariableRegister(ObjectType* object, const char* objectName, std::tuple&gt;Types*...&lt; variables);
+    template&lt;class... Parameters&gt;
+    ObjectVariableRegister(ObjectType* object, std::tuple&lt;Types*...&gt; variables, std::tuple&lt;Parameters...&lt; names);
+    template&lt;class... Parameters&gt;
+    ObjectVariableRegister(ObjectType* object, const char* objectName, std::tuple&lt;Types*...&gt; variables, std::tuple&lt;Parameters...&gt; names);
+};
+                </code></pre>
+                <h3>Parameters</h3>
+
+                <p><code class="highlighted break-word">object</code><br> 
+                    Address of object to be tracked.</p>
+                <p><code class="highlighted break-word">objectName</code><br> 
+                    Name of object. These names will be displayed in database entries. If left blank or set to nullptr it will be tagged as #UNNAMED in the entry.</p>
+                <p><code class="highlighted break-word">variables</code><br> 
+                    List of all variable addresses to keep track of in one object. See utility function V in DebugYourselfUtility.</p>
+                <p><code class="highlighted break-word">names</code><br> 
+                    Name of variables... in same order. These names will be displayed in database entries. If left blank or set to nullptr it will be tagged as #UNNAMED in the entry. See utility function N in DebugYourselfUtility.</p>
+                <h3>
+                    Description
+                </h3>
+                <h3>
+                    Examples
+                </h3>
+                    <pre><code>
+class ExampleClass {
+private:
+    void voidVariable;
+public:
+    bool boolVariable;
+    char charVariable;
+
+    using RegisterType = DebugYourself::ObjectVariableRegister&lt;
+        decltype(voidFunction),
+        decltype(boolFunction),
+        decltype(charFunction)&gt;;
+
+    RegisterType OBJECTREGISTER =
+            RegisterType(
+                "voidFunction",
+                "boolFunction",
+                "charFunction");
+};
+                    </code></pre>
+                <h3>
+                    Errors
+                </h3>
+            </div>
+            <div class="overflow-hidden content-section" id="content-get-globalfunctionregister">
+                <h2>GlobalFunctionRegister</h2>
+                    <p>Collection of global functions.</p>
+                    <h3>Specification</h3>
+                <pre><code class="cpp">
+template&lt;auto... functionPointers&gt;
+class GlobalFunctionRegister{
+    template&lt;class... Parameters&gt;
+    GlobalFunctionRegister(Parameters... names);
+    template&lt;class... Parameters&gt;
+    GlobalFunctionRegister(std::tuple&lt;Parameters...&gt; names);
+};
+                </code></pre>
+                <h3>Parameters</h3>
+
+                <p><code class="highlighted break-word">functionPointers...</code><br> 
+                    List of all function addresses to keep track of.</p>
+                <p><code class="highlighted break-word">names...</code> <br> 
+                Name of functionPointers... in same order. These names will be displayed in database entries. If left blank or set to nullptr it will be tagged as #UNNAMED in the entry. For use of tuple as argument see utility function N in DebugYourselfUtility.</p>
+                <h3>
+                    Description
+                </h3>
+                <p>Should only be initialized once with all global functions intended to be tracked. This include functions within any scope such as namespaces except for classes and structs. See ClassFunctionRegister for tracking member functions.</p>
+                <h3>
+                    Examples
+                </h3>
+                    <pre><code>
+namespace my_namespace { void voidFunction() {} }
+bool boolFunction() { return true; }
+char charFunction() { return ' '; }
+
+auto FUNCTIONREGISTER =
+    DebugYourself::GlobalFunctionRegister&lt;
+    &my_namespace::voidFunction,
+    &boolFunction,
+    &charFunction&gt;(
+        "voidFunction",
+        "boolFunction",
+        "charFunction");
+                    </code></pre>
+                <h3>
+                    Errors
+                </h3>
+            </div>
+            <div class="overflow-hidden content-section" id="content-get-fundamentalvariableregister">
+                <h2>FundamentalVariableRegister</h2>
+                    <p>Collection of global variables.</p>
+                    <h3>Specification</h3>
+                <pre><code class="cpp">
+template&lt;class... Types&gt;
+class FundamentalVariableRegister{
+    FundamentalVariableRegister();
+    FundamentalVariableRegister(std::tuple&lt;Types...&gt; variables);
+    template&lt;class... Parameters&gt;
+    FundamentalVariableRegister(std::tuple&lt;Types...&gt; variables, std::tuple&lt;Parameters...&gt; names);
+};
+                </code></pre>
+                <h3>Parameters</h3>
+
+                <p><code class="highlighted break-word">variables</code><br> 
+                    List of all variable addresses to keep track of. See utility function V in DebugYourselfUtility.</p>
+                <p><code class="highlighted break-word">names</code><br> 
+                    Name of variables... in same order. These names will be displayed in database entries. If left blank or set to nullptr it will be tagged as #UNNAMED in the entry. See utility function N in DebugYourselfUtility for use of tuple argument.</p>
+                <h3>
+                    Description
+                </h3>
+                <p>This register should mainly be used for tracking fundamental variables such as int, char, bool etc. May be used for objects which cannot have or would be inconvenient to have internal variables tracked, such as certain libraries and object created from the standard library. Object already tracked using ObjectVariableRegister must not be tracked.</p>
+                <h3>
+                    Examples
+                </h3>
+                    <pre><code>
+void voidVariable;
+bool boolVariable;
+char charVariable;
+
+using RegisterType = DebugYourself::FundamentalVariableRegister&lt;
+    decltype(voidVariable),
+    decltype(boolVariable),
+    decltype(charVariable)&gt;
+
+RegisterType VARIABLEREGISTER =
+    RegisterType(
+        "voidVariable",
+        "boolVariable",
+        "charVariable");
+                    </code></pre>
+                <h3>
+                    Errors
+                </h3>
+            </div>
+        </div>
+        <div class="overflow-hidden content-section" id="content-get-binders">
+            <h1>Binders</h1>
+            <div class="overflow-hidden content-section" id="content-get-classfunctionregisterbinder">
+                <h2>ClassFunctionRegisterBinder</h2>
+                    <p>A collection of ClassFunctionRegisters.</p>
+                    <h3>Specification</h3>
+                <pre><code class="cpp">
+template&lt;class... Registers&gt;
+class ClassFunctionRegisterBinder{
+    ClassFunctionRegisterBinder()
+    ClassFunctionRegisterBinder(Registers... registers);
+
+    static void use(const ClassFunctionRegisterBinder&lt;Registers...&gt;& binder);
+};
+                </code></pre>
+                <h3>Parameters</h3>
+
+                <p><code class="highlighted break-word">registers</code><br> 
+                    Allows for passing name data.</p>
+                <p><code class="highlighted break-word">binder</code><br> 
+                    Used to select the class ClassFunctionRegisterBinder which will be used to do logging. See Messaging.</p>
+                <h3>Description</h3>
+                    <p></p>
+                
+                <h3>
+                    Examples
+                </h3>
+                    <pre><code>
+DebugYourself::ClassFunctionRegisterBinder binder(
+        Class1::register,
+        Class2::register,
+        Class3::register
+    );
+
+    binder.use(ClassBinder);
+                    </code></pre>
+                <h3>
+                    Errors
+                </h3>
+            </div>
+            <div class="overflow-hidden content-section" id="content-get-objectvariableregisterbinder">
+                <h2>ObjectVariableRegisterBinder</h2>
+                    <p>A collection of ObjectVariableRegisters</p>
+                    <h3>Specification</h3>
+                <pre><code class="cpp">
+template&lt;class... Registers&gt;
+class ObjectVariableRegisterBinder {
+    ObjectVariableRegisterBinder();
+    ObjectVariableRegisterBinder(Registers...);
+
+    template&lt;class... Register&gt;
+    static void add(Register&... reg);
+};
+                </code></pre>
+                <h3>Parameters</h3>
+
+                <p><code class="highlighted break-word">reg...</code><br> 
+                    Adds registers of any type declared in Register... .</p>
+                <h3>
+                    Description
+                </h3>
+                <h3>
+                    Examples
+                </h3>
+                    <pre><code>
+ClassA objectA1;
+ClassA objectA2;
+ClassA objectA3;
+ClassB objectB1;
+ClassB objectB2;
+ClassC objectC1;
+
+DebugYourself::ObjectVariableRegisterBinder&lt;
+    decltype(objectA1.register), 
+    decltype(objectB1.register), 
+    decltype(objectC1.register)&gt; binder;
+
+binder.add(
+    objectA1.register
+    objectA2.register
+    objectA3.register
+    objectB1.register
+    objectB2.register
+    objectC1.register);
+
+ClassB objectB3;
+binder.add(
+    objectB3.register);
+                    </code></pre>
+                <h3>
+                    Errors
+                </h3>
+            </div>
+            <div class="overflow-hidden content-section" id="content-get-globalfunctionregisterbinder">
+                <h2>GlobalFunctionRegisterBinder</h2>
+                    <p>Collection of GlobalFunctionRegisters</p>
+                    <h3>Specification</h3>
+                <pre><code class="cpp">
+template&lt;auto... functionPointers&gt;
+class GlobalFunctionRegister{
+    template&lt;class... Parameters&gt;
+    GlobalFunctionRegister(Parameters... names);
+    template&lt;class... Parameters&gt;
+    GlobalFunctionRegister(std::tuple&lt;Parameters...&gt; names);
+};
+                </code></pre>
+                <h3>Parameters</h3>
+
+                <p><code class="highlighted break-word">functionPointers...</code><br> 
+                    List of all function addresses to keep track of.</p>
+                <p><code class="highlighted break-word">names...</code> <br> 
+                Name of functionPointers... in same order. These names will be displayed in database entries. If left blank or set to nullptr it will be tagged as #UNNAMED in the entry. For use of tuple as argument see utility function N in DebugYourselfUtility.</p>
+                <h3>
+                    Description
+                </h3>
+                <p>Should only be initialized once with all global functions intended to be tracked. This include functions within any scope such as namespaces except for classes and structs. See ClassFunctionRegister for tracking member functions.</p>
+                <h3>
+                    Examples
+                </h3>
+                    <pre><code>
+namespace my_namespace { void voidFunction() {} }
+bool boolFunction() { return true; }
+char charFunction() { return ' '; }
+
+auto FUNCTIONREGISTER =
+    DebugYourself::GlobalFunctionRegister&lt;
+    &my_namespace::voidFunction,
+    &boolFunction,
+    &charFunction&gt;(
+        "voidFunction",
+        "boolFunction",
+        "charFunction");
+                    </code></pre>
+                <h3>
+                    Errors
+                </h3>
+            </div>
+            <div class="overflow-hidden content-section" id="content-get-fundamentalvariableregisterbinder">
+                <h2>FundamentalVariableRegisterBinder</h2>
+                    <p>Collection of global variables.</p>
+                    <h3>Specification</h3>
+                <pre><code class="cpp">
+template&lt;class... Registers&gt;
+class FundamentalVariableRegisterBinder {
+    FundamentalVariableRegisterBinder();
+    FundamentalVariableRegisterBinder(Registers...);
+
+    template&lt;class... Register&gt;
+    static void add(Register&... reg);
+};
+                </code></pre>
+                <h3>Parameters</h3>
+
+                <p><code class="highlighted break-word">reg...</code><br> 
+                    Adds registers of any type declared in Register... .</p>
+                <h3>
+                    Description
+                </h3>
+                <h3>
+                    Examples
+                </h3>
+                    <pre><code>
+auto binder = DebugYourself::FundamentalVariableRegisterBinder(registerA1, registerB1, registerC1);
+
+binder.add(
+    registerA1,
+    registerA2,
+    registerA3,
+    registerB1,
+    registerB2,
+    registerC1,
+    registerC2);
+                    </code></pre>
+                <h3>
+                    Errors
+                </h3>
+            </div>
+        </div>
+        <div class="overflow-hidden content-section" id="content-get-messaging">
+            <h1>Messaging</h1>
+                <p>All messaging function require to set up dependencies.</p>
+                <pre><code class="cpp">
+    using DY = DebugYourself::Dependencies&lt;
+        ClassFunctionRegister&lt;...&gt;,
+        ObjectFunctionRegister&lt;...&gt;,
+        GlobalFunctionRegister&lt;...&gt;,
+        FundamentalFunctionRegister&gt;;
+                </code></pre>
+                <div class="overflow-hidden content-section" id="content-get-debug">
+                    <h2>debug</h2>
+                        <p>A collection of ClassFunctionRegisters.</p>
+                        <h3>Specification</h3>
+                    <pre><code class="cpp">
+    template&lt;class Function&gt;
+    struct _GetClassFromFunctionPointer {};
+
+    template&lt;class TClass, class TReturnType, class... TParameters&gt;
+    struct _GetClassFromFunctionPointer&lt;TReturnType(TClass::*)(TParameters...)&gt; {
+        using Class = TClass;
+    };
+
+    template&lt;auto function&gt;
+    using GetClassFromFunctionPointer = _GetClassFromFunctionPointer&lt;decltype(function)&gt;::Class;
+
+    template&lt;auto functionPointer, class Variable&gt;
+    static void debug(GetClassFromFunctionPointer&lt;functionPointer&gt;* object, Variable* variable, intmax_t debugLevel, std::string message);
+    template&lt;auto functionPointer, class Variable&gt;
+    static void debug(Variable* variable, intmax_t debugLevel, std::string message);
+                    </code></pre>
+                    <h3>Parameters</h3>
+
+                    <p><code class="highlighted break-word">functionPointer</code><br> 
+                        The function where this function call takes place.</p>
+                    <p><code class="highlighted break-word">object</code><br> 
+                        The object where this function call takes place.</p>
+                    <p><code class="highlighted break-word">variable</code><br> 
+                        The variable the message is about. Set to nullptr if the message in not in regards to a variable.</p>
+                    <p><code class="highlighted break-word">debugLevel</code><br> 
+                        This value is free to be used for versioning, message severity etc., with the intent to be able to filter and sort in ascending or decending order.</p>
+                    <h3>Description</h3>
+                        <p></p>
+                    
+                    <h3>
+                        Examples
+                    </h3>
+                        <pre><code>
+    bool function(int param){
+        bool result = (param == 5)
+        DY::debug<&function>(&result, 100, "Message go here.");
+    }
+
+    bool myClass::function(int param){
+        bool result = (param == 5)
+        DY::debug<&function>(this, &result, 100, "Message go here.");
+    }
+                        </code></pre>
+                <h3>
+                    Errors
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="content-code"></div>
+</div>
+<!-- Github Corner Ribbon - to remove (Ribbon created with : http://tholman.com/github-corners/ )-->
+<a href="https://github.com/ticlekiwi/API-Documentation-HTML-Template" class="github-corner" aria-label="View source on Github" title="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="z-index:99999; fill:#70B7FD; color:#fff; position: fixed; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>
+    .github-corner:hover .octo-arm {
+        animation: octocat-wave 560ms ease-in-out
+    }
+
+    @keyframes octocat-wave {
+        0%,
+        100% {
+            transform: rotate(0)
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg)
+        }
+        40%,
+        80% {
+            transform: rotate(10deg)
+        }
+    }
+
+    @media (max-width:500px) {
+        .github-corner:hover .octo-arm {
+            animation: none
+        }
+        .github-corner .octo-arm {
+            animation: octocat-wave 560ms ease-in-out
+        }
+    }
+    @media only screen and (max-width:680px){ .github-corner > svg { right: auto!important; left: 0!important; transform: rotate(270deg)!important;}}
+</style>
+<!-- END Github Corner Ribbon - to remove -->
+<script src="js/script.js"></script>
+</body>
+
+</html>
